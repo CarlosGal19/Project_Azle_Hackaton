@@ -1,0 +1,50 @@
+{
+  "canisters": {
+    "azle_project_hackaton_backend": {
+      "build": "npx azle azle_project_hackaton_backend",
+      "candid": "src/azle_project_hackaton_backend/azle_project_hackaton_backend.did",
+      "gzip": true,
+      "main": "src/azle_project_hackaton_backend/src/index.ts",
+      "tech_stack": {
+        "cdk": {
+          "azle": {}
+        },
+        "language": {
+          "javascript": {},
+          "typescript": {}
+        }
+      },
+      "type": "custom",
+      "wasm": ".azle/azle_project_hackaton_backend/azle_project_hackaton_backend.wasm"
+    },
+    "azle_project_hackaton_frontend": {
+      "dependencies": [
+        "azle_project_hackaton_backend"
+      ],
+      "source": [
+        "src/azle_project_hackaton_frontend/dist"
+      ],
+      "type": "assets",
+      "workspace": "azle_project_hackaton_frontend"
+    },
+    "internet_identity": {
+      "candid": "https://github.com/dfinity/internet-identity/releases/latest/download/internet_identity.did",
+      "frontend": {},
+      "remote": {
+        "id": {
+          "ic": "rdmx6-jaaaa-aaaaa-aaadq-cai"
+        }
+      },
+      "type": "custom",
+      "wasm": "https://github.com/dfinity/internet-identity/releases/latest/download/internet_identity_dev.wasm.gz"
+    }
+  },
+  "defaults": {
+    "build": {
+      "args": "",
+      "packtool": ""
+    }
+  },
+  "output_env_file": ".env",
+  "version": 1
+}
