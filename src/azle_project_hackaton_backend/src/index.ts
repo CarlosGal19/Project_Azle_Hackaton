@@ -1,6 +1,9 @@
 import { Server, ic } from 'azle';
 import express from 'express';
 import cors from 'cors';
+import connectDB from './config/db.js';
+import InitialRouter from './routes/initial_sample.js';
+import FinalRouter from './routes/final_sample.js';
 
 export default Server(() => {
 
@@ -11,7 +14,7 @@ export default Server(() => {
         temperature: Number,
         turbidity: Number,
         tds: Number,
-        amount: Number 
+        amount: Number
     };
 
     let initial_sample : Sample[] = [
@@ -43,18 +46,21 @@ export default Server(() => {
     app.use(cors());
     app.use(express.json());
 
-    app.use((req, res, next) => {
-        if (ic.caller().isAnonymous()) {
-            res.status(401);
-            res.send();
-        } else {
-            next();
-        }
-    });
+    connectDB();
+
+    // app.use((req, res, next) => {
+    //     if (ic.caller().isAnonymous()) {
+    //         return res.status(401).send('Unauthorized. Please login to access this resource');
+    //     }
+    //     next();
+    // });
 
     app.get('/', (req, res) => {
-        return 'Hello world';
-    })
+        return res.status(200).send({message: 'Hello World'});
+    });
+
+    app.use('/api/initial_sample', InitialRouter);
+    app.use('/api/final_sample', FinalRouter);
 
     return app.listen();
 })
