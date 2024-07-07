@@ -39,7 +39,17 @@ export default Server(() => {
 
     const app = express();
 
-    app.use(cors());
+    const allowDomains = [
+        'http://127.0.0.1:4943/?canisterId=bd3sg-teaaa-aaaaa-qaaba-cai',
+        'http://bd3sg-teaaa-aaaaa-qaaba-cai.localhost:4943/'
+    ]
+
+    const corsOptions = {
+        origin: allowDomains,
+        optionsSuccessStatus: 200
+    }
+
+    app.use(cors(corsOptions));
     app.use(express.json());
 
     app.get('/greet', (req: Request, res) => {
