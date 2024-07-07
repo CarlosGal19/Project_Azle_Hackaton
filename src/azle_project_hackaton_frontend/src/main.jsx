@@ -10,6 +10,7 @@ import Initial from './pages/Initial';
 import Final from './pages/Final';
 import Test from './pages/Test';
 import Suggest from './pages/Suggest';
+
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <IcpConnectContextProvider client={client}>
