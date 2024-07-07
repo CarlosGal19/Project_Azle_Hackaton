@@ -5,12 +5,16 @@ const App = () => {
     'Alan Gabriel Saldaña Guerrero',
     'Marco Antonio Lozano Arellano',
     'Erasmo Díaz Ruiz',
-    'Angela Nayeli Luna Fabián'
+    'Angela Nallely Luna Fabián'
   ];
 
   return (
     <div className="min-h-screen bg-gray-100 p-4">
       <div className="max-w-6xl mx-auto">
+        <div className="flex justify-center mb-8">
+          <img src="./utma.png" alt="UTMA Logo" className="h-32 w-auto" />
+          <img src="/aquanova.png" alt="Aquanova Logo" className="h-32 w-32 ml-4" />
+        </div>
         <div className="bg-white border border-blue-800 p-8 rounded-lg shadow-lg">
           <h1 className="text-center text-3xl font-bold text-blue-800 mb-4">Water Treatment Project</h1>
           <p className="text-gray-700 mb-4">
@@ -45,8 +49,7 @@ const App = () => {
           </div>
         </div>
 
-        {/* Agregar la sección de autores */}
-        <div className="mt-8">
+        <div className="bg-white border border-blue-800 p-8 rounded-lg shadow-lg mt-8">
           <h2 className="text-2xl font-bold text-blue-800 mb-4">Project Authors</h2>
           <ul className="list-disc list-inside text-gray-700">
             {authors.map((author, index) => (
