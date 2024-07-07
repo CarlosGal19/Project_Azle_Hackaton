@@ -45,13 +45,13 @@ export default Server(() => {
 
     // app.use((req, res, next) => {
     //     if (ic.caller().isAnonymous()) {
-    //         return res.status(401).send('Unauthorized. Please login to access this resource');
+    //         return res.status(401).send({message: 'Unauthorized. Please login to access this resource'});
     //     }
     //     next();
     // });
 
-    app.get('/greet', (req, res) => {
-        return res.status(200).send({message: 'Hello World from Azle!'});
+    app.get('/greet', (req: Request, res: any) => {
+        return res.status(200).send({message: 'Hello World from Azle!', caller: ic.caller()});
     });
 
     return app.listen();
