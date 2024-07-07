@@ -1,5 +1,5 @@
 const App = () => {
-  const autores = [
+  const authors = [
     'Carlos Alejandro Galindo Islas',
     'José Álvaro Esparza López',
     'Alan Gabriel Saldaña Guerrero',
@@ -49,9 +49,9 @@ const App = () => {
         <div className="mt-8">
           <h2 className="text-2xl font-bold text-blue-800 mb-4">Project Authors</h2>
           <ul className="list-disc list-inside text-gray-700">
-            {autores.map((autor, index) => (
+            {authors.map((author, index) => (
               <li key={index}>
-                {autor}
+                {author}
               </li>
             ))}
           </ul>
