@@ -5,15 +5,16 @@ import { useAuth, useRestActor } from "@bundly/ares-react";
 
 const Final = () => {
 
-  const backend = useRestActor('azle_project_hackaton_backend');
+  const { isAuthenticated, currentIdentity } = useAuth();
+  const backend = useRestActor('azle_project_hackaton_backend', currentIdentity);
 
-  const { isAuthenticated } = useAuth();
 
   const [alert, setAlert] = useState(null);
   const [samples, setSamples] = useState([]);
 
   useEffect(() => {
-    async function validate(){
+    async function validate() {
+      setAlert(null);
       if (!isAuthenticated) {
         setAlert({
           type: 'alert',
@@ -26,11 +27,11 @@ const Final = () => {
         setSamples(response.data.message);
       } catch (error) {
         setAlert({
-          type: 'error',
+          type: 'alert',
           message: 'An error occurred while fetching the data',
         });
+        return
       }
-      setAlert(null);
       if (samples.length === 0) {
         setAlert({
           type: 'alert',
@@ -38,6 +39,7 @@ const Final = () => {
         });
         return;
       }
+      setAlert(null);
     }
     validate();
   }, [samples.length, isAuthenticated]);

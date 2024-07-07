@@ -4,44 +4,43 @@ import { useEffect, useState } from "react";
 import { useAuth, useRestActor } from "@bundly/ares-react";
 
 const Initial = () => {
-  const backend = useRestActor('azle_project_hackaton_backend');
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, currentIdentity } = useAuth();
+  const backend = useRestActor('azle_project_hackaton_backend', currentIdentity);
 
   const [alert, setAlert] = useState(null);
   const [samples, setSamples] = useState([]);
 
   useEffect(() => {
-    async function fetchData() {
+    async function validate() {
+      setAlert(null);
+      if (!isAuthenticated) {
+        setAlert({
+          type: 'alert',
+          message: 'You need to be authenticated to see this page',
+        });
+        return;
+      }
       try {
-        if (!isAuthenticated) {
-          setAlert({
-            type: 'alert',
-            message: 'You need to be authenticated to see this page',
-          });
-          return;
-        }
-
         const response = await backend.get('initial_samples');
         setSamples(response.data.message);
-
-        if (samples.length === 0) {
-          setAlert({
-            type: 'alert',
-            message: 'No samples found',
-          });
-          return
-        }
-        setAlert(null);
       } catch (error) {
         setAlert({
-          type: 'error',
+          type: 'alert',
           message: 'An error occurred while fetching the data',
         });
+        return
       }
+      if (samples.length === 0) {
+        setAlert({
+          type: 'alert',
+          message: 'No samples found',
+        });
+        return;
+      }
+      setAlert(null);
     }
-
-    fetchData();
-  }, [samples.length, isAuthenticated]); // Include backend and isAuthenticated in dependencies
+    validate();
+  }, [samples.length, isAuthenticated]);
 
   return (
     <div className="min-h-screen bg-gray-100 p-4">
