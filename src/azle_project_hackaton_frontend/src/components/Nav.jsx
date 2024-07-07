@@ -7,15 +7,14 @@ const Nav = () => {
     const { currentIdentity, isAuthenticated } = useAuth();
 
   return (
-    <nav className="flex">
+    <nav className="flex mb-8 mt-4">
         <div className="w-4/5 my-auto">
-            <ul className="flex justify-evenly">
+            <ul className="flex justify-evenly font-bold text-3xl text-blue-900">
                 <li><Link to='/'>Home</Link></li>
                 <li><Link to='/initial'>Initial Test</Link></li>
                 <li><Link to='/final'>Final Test</Link></li>
                 <li><Link to='/test'>Test</Link></li>
                 <li><Link to='/suggest'>Suggestions</Link></li>
-                <li><Link to='/about'>About us</Link></li>
             </ul>
         </div>
         <div className="flex w-1/5 justify-center">
