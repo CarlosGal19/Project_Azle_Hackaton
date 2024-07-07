@@ -1,9 +1,6 @@
 import { Server, ic } from 'azle';
 import express from 'express';
 import cors from 'cors';
-import connectDB from './config/db.js';
-import InitialRouter from './routes/initial_sample.js';
-import FinalRouter from './routes/final_sample.js';
 
 export default Server(() => {
 
@@ -46,8 +43,6 @@ export default Server(() => {
     app.use(cors());
     app.use(express.json());
 
-    connectDB();
-
     // app.use((req, res, next) => {
     //     if (ic.caller().isAnonymous()) {
     //         return res.status(401).send('Unauthorized. Please login to access this resource');
@@ -55,12 +50,9 @@ export default Server(() => {
     //     next();
     // });
 
-    app.get('/', (req, res) => {
-        return res.status(200).send({message: 'Hello World'});
+    app.get('/greet', (req, res) => {
+        return res.status(200).send({message: 'Hello World from Azle!'});
     });
-
-    app.use('/api/initial_sample', InitialRouter);
-    app.use('/api/final_sample', FinalRouter);
 
     return app.listen();
 })
