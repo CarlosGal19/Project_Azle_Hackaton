@@ -1,5 +1,5 @@
-import { Server } from 'azle';
-import express, { Request } from 'express';
+import { Server, ic } from 'azle';
+import express, { Request, Response, NextFunction } from 'express';
 import cors from 'cors';
 
 export default Server(() => {
@@ -39,38 +39,37 @@ export default Server(() => {
 
     const app = express();
 
-    const allowDomains = [
-        'http://127.0.0.1:4943/?canisterId=bd3sg-teaaa-aaaaa-qaaba-cai',
-        'http://bd3sg-teaaa-aaaaa-qaaba-cai.localhost:4943/'
-    ]
-
-    const corsOptions = {
-        origin: allowDomains,
-        optionsSuccessStatus: 200
-    }
-
-    app.use(cors(corsOptions));
+    app.use(cors());
     app.use(express.json());
 
-    app.get('/greet', (req: Request, res) => {
+    function AuthGuard(req: Request, res: Response, next: NextFunction) {
+        if (ic.caller().isAnonymous()) {
+          res.status(401);
+          res.send("You are not authorized to access this resource.");
+        } else {
+          next();
+        }
+      }
+
+    app.get('/greet', AuthGuard, (req: Request, res) => {
         return res.status(200).send({ message: 'Hello World from Azle!' });
     });
 
-    app.get('/initial_samples', (req: Request, res) => {
+    app.get('/initial_samples', AuthGuard, (req: Request, res) => {
         if (initial_sample.length === 0) {
             return res.status(404).send({ message: 'No samples' });
         }
         return res.status(200).send({ message: initial_sample });
     });
 
-    app.get('/final_samples', (req: Request, res) => {
+    app.get('/final_samples', AuthGuard, (req: Request, res) => {
         if (final_sample.length === 0) {
             return res.status(404).send({ message: 'No samples' });
         }
         return res.status(200).send({ message: final_sample });
     });
 
-    app.post('/initial_sample', (req: Request, res) => {
+    app.post('/initial_sample', AuthGuard, (req: Request, res) => {
         const { id, dateTime, pH, temperature, turbidity, tds, quantity } = req.body;
         if (!id || !dateTime || !pH || !temperature || !turbidity || !tds || !quantity) {
             return res.status(400).send({ message: 'Incomplete sample data' });
@@ -90,7 +89,7 @@ export default Server(() => {
         return res.status(200).send({ message: 'Sample added successfully', sample: newSample });
     });
 
-    app.post('/final_sample', (req: Request, res) => {
+    app.post('/final_sample', AuthGuard, (req: Request, res) => {
         const { id, dateTime, pH, temperature, turbidity, tds, quantity } = req.body;
         if (!id || !dateTime || !pH || !temperature || !turbidity || !tds || !quantity) {
             return res.status(400).send({ message: 'Incomplete sample data' });
