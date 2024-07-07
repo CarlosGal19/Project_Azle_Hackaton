@@ -1,20 +1,19 @@
 import { Server } from 'azle';
-import express from 'express';
+import express, { Request } from 'express';
 import cors from 'cors';
 
 export default Server(() => {
-
     type Sample = {
-        id: String,
+        id: string,
         dateTime: Date,
-        pH: Number,
-        temperature: Number,
-        turbidity: Number,
-        tds: Number,
-        quantity: Number
+        pH: number,
+        temperature: number,
+        turbidity: number,
+        tds: number,
+        quantity: number
     };
 
-    let initial_sample : Sample[] = [
+    let initial_sample: Sample[] = [
         {
             id: "872910203810",
             dateTime: new Date('2024-07-27T16:56:00'),
@@ -26,7 +25,7 @@ export default Server(() => {
         }
     ];
 
-    let final_sample : Sample[] = [
+    let final_sample: Sample[] = [
         {
             id: "872910203402",
             dateTime: new Date('2024-07-27T17:34:00'),
@@ -43,22 +42,62 @@ export default Server(() => {
     app.use(cors());
     app.use(express.json());
 
-    app.get('/greet', (req: Request, res: any) => {
-        return res.status(200).send({message: 'Hello World from Azle!'});
+    app.get('/greet', (req: Request, res) => {
+        return res.status(200).send({ message: 'Hello World from Azle!' });
     });
 
-    app.get('/initial_samples', (req: Request, res: any) => {
-        if(initial_sample.length === 0){
-            return res.status(404).send({message: 'No samples'});
+    app.get('/initial_samples', (req: Request, res) => {
+        if (initial_sample.length === 0) {
+            return res.status(404).send({ message: 'No samples' });
         }
-        return res.status(200).send({message: initial_sample});
+        return res.status(200).send({ message: initial_sample });
     });
 
-    app.get('/final_samples', (req: Request, res: any) => {
-        if(final_sample.length === 0){
-            return res.status(404).send({message: 'No samples'});
+    app.get('/final_samples', (req: Request, res) => {
+        if (final_sample.length === 0) {
+            return res.status(404).send({ message: 'No samples' });
         }
-        return res.status(200).send({message: final_sample});
+        return res.status(200).send({ message: final_sample });
+    });
+
+    app.post('/initial_sample', (req: Request, res) => {
+        const { id, dateTime, pH, temperature, turbidity, tds, quantity } = req.body;
+        if (!id || !dateTime || !pH || !temperature || !turbidity || !tds || !quantity) {
+            return res.status(400).send({ message: 'Incomplete sample data' });
+        }
+
+        const newSample: Sample = {
+            id,
+            dateTime: new Date(dateTime),
+            pH,
+            temperature,
+            turbidity,
+            tds,
+            quantity
+        };
+
+        initial_sample.push(newSample);
+        return res.status(200).send({ message: 'Sample added successfully', sample: newSample });
+    });
+
+    app.post('/final_sample', (req: Request, res) => {
+        const { id, dateTime, pH, temperature, turbidity, tds, quantity } = req.body;
+        if (!id || !dateTime || !pH || !temperature || !turbidity || !tds || !quantity) {
+            return res.status(400).send({ message: 'Incomplete sample data' });
+        }
+
+        const newSample: Sample = {
+            id,
+            dateTime: new Date(dateTime),
+            pH,
+            temperature,
+            turbidity,
+            tds,
+            quantity
+        };
+
+        final_sample.push(newSample);
+        return res.status(200).send({ message: 'Sample added successfully', sample: newSample });
     });
 
     return app.listen();
