@@ -20,8 +20,7 @@
     "@bundly/ares-react": "^0.2.0",
     "@bundly/ares-rest": "^0.1.1",
     "cors": "^2.8.5",
-    "express": "^4.19.2",
-    "mongoose": "^8.4.5"
+    "express": "^4.19.2"
   },
   "devDependencies": {
     "@bundly/ares-core": "^0.2.0",
