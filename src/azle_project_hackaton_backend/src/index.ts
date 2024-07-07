@@ -48,22 +48,18 @@ export default Server(() => {
     });
 
     app.get('/initial_samples', (req: Request, res: any) => {
+        if(initial_sample.length === 0){
+            return res.status(404).send({message: 'No samples'});
+        }
         return res.status(200).send({message: initial_sample});
     });
 
     app.get('/final_samples', (req: Request, res: any) => {
+        if(final_sample.length === 0){
+            return res.status(404).send({message: 'No samples'});
+        }
         return res.status(200).send({message: final_sample});
     });
 
-    // Get the latest initial sample
-    app.get('/latest_initial_sample', (req: Request, res: any) => {
-        return res.status(200).send({message: initial_sample[initial_sample.length - 1]});
-    });
-
-    // Get the latest final sample
-    app.get('/latest_final_sample', (req: Request, res: any) => {
-        return res.status(200).send({message: final_sample[final_sample.length - 1]});
-    });
-
     return app.listen();
-})
+});
