@@ -33,7 +33,7 @@ const App = () => {
           <div className="bg-white p-6 rounded-lg shadow-lg">
             <h2 className="text-xl font-bold text-blue-800 mb-2">Vision</h2>
             <p className="text-gray-700">
-              To be leaders in water treatment technology, offering the highest quality products and services globally.
+              To be leaders in water treatment technology, offering the highest quality products and services in Aguascalientes.
             </p>
           </div>
 
