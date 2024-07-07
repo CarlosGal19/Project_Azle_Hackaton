@@ -3,10 +3,10 @@ import Alert from '../components/Alert';
 import { useAuth, useRestActor } from '@bundly/ares-react';
 
 const Test = () => {
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, currentIdentity } = useAuth();
   const [alert, setAlert] = useState(null);
 
-  const backend = useRestActor('azle_project_hackaton_backend');
+  const backend = useRestActor('azle_project_hackaton_backend', currentIdentity);
 
   const [loading, setLoading] = useState({ initial: false, final: false });
   const [initialTestData, setInitialTestData] = useState(null);
@@ -66,9 +66,9 @@ const Test = () => {
         }
       });
       console.log(response.data.message);
-      setInitialTestData(response.data.sample);
+      setFinalTestData(response.data.sample);
     } catch (error) {
-      console.error('Error adding initial sample:', error);
+      console.error('Error adding final sample:', error);
       // Handle error display or retry logic
     } finally {
       setLoading({ ...loading, final: false });
