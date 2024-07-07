@@ -24,14 +24,14 @@ const Initial = () => {
         const response = await backend.get('initial_samples');
         setSamples(response.data.message);
 
-        if (response.data.message.length === 0) {
+        if (samples.length === 0) {
           setAlert({
             type: 'alert',
             message: 'No samples found',
           });
-        } else {
-          setAlert(null);
+          return
         }
+        setAlert(null);
       } catch (error) {
         setAlert({
           type: 'error',
@@ -48,7 +48,7 @@ const Initial = () => {
       <div className="max-w-6xl mx-auto">
         <h1 className="text-2xl font-bold text-blue-800 mb-4 text-center">Initial Tests History</h1>
         {
-          samples.length === 0 ? (
+          samples.length === 0 || alert ? (
             <Alert data={alert} />
           ) : (
             <div className="grid gap-8 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">

@@ -30,6 +30,7 @@ const Final = () => {
           message: 'An error occurred while fetching the data',
         });
       }
+      setAlert(null);
       if (samples.length === 0) {
         setAlert({
           type: 'alert',
@@ -37,7 +38,6 @@ const Final = () => {
         });
         return;
       }
-      setAlert(null);
     }
     validate();
   }, [samples.length, isAuthenticated]);
@@ -47,7 +47,7 @@ const Final = () => {
       <div className="max-w-6xl mx-auto">
         <h1 className="text-2xl font-bold text-blue-800 mb-4 text-center">Final Tests History</h1>
         {
-          samples.length === 0 ? (
+          samples.length === 0 || alert ? (
             <Alert data={alert} />
           ) : (
             <div className="grid gap-8 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
