@@ -1,6 +1,13 @@
-import React from 'react';
-
 const App = () => {
+  const autores = [
+    'Carlos Alejandro Galindo Islas',
+    'José Álvaro Esparza López',
+    'Alan Gabriel Saldaña Guerrero',
+    'Marco Antonio Lozano Arellano',
+    'Erasmo Díaz Ruiz',
+    'Angela Nayeli Luna Fabián'
+  ];
+
   return (
     <div className="min-h-screen bg-gray-100 p-4">
       <div className="max-w-6xl mx-auto">
@@ -36,6 +43,18 @@ const App = () => {
               <li>Responsibility</li>
             </ul>
           </div>
+        </div>
+
+        {/* Agregar la sección de autores */}
+        <div className="mt-8">
+          <h2 className="text-2xl font-bold text-blue-800 mb-4">Project Authors</h2>
+          <ul className="list-disc list-inside text-gray-700">
+            {autores.map((autor, index) => (
+              <li key={index}>
+                {autor}
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     </div>
