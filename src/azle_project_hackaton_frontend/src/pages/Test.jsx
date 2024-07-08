@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import Alert from '../components/Alert';
 import { useAuth, useRestActor } from '@bundly/ares-react';
+import Spinner from '../components/Spinner';
 
 const Test = () => {
   const { isAuthenticated, currentIdentity } = useAuth();
@@ -92,9 +93,7 @@ const Test = () => {
                 Start Initial Test
               </button>
               {loading.initial && (
-                <div className="flex justify-center mt-2">
-                  <div className="loader border-t-4 border-blue-800 rounded-full w-8 h-8 animate-spin"></div>
-                </div>
+                <Spinner color="blue" />
               )}
               {initialTestData && !loading.initial && (
                 <div className="mt-4 bg-white p-4 rounded-lg shadow-lg border border-blue-800">
@@ -119,13 +118,11 @@ const Test = () => {
                 Start Final Test
               </button>
               {loading.final && (
-                <div className="flex justify-center mt-2">
-                  <div className="loader border-t-4 border-green-500 rounded-full w-8 h-8 animate-spin"></div>
-                </div>
+                <Spinner color="green" />
               )}
               {finalTestData && !loading.final && (
-                <div className="mt-4 bg-white p-4 rounded-lg shadow-lg border border-green-500">
-                  <h2 className="text-xl font-bold text-green-500 mb-2">Final Test Data</h2>
+                <div className="mt-4 bg-white p-4 rounded-lg shadow-lg border border-green-800">
+                  <h2 className="text-xl font-bold text-green-800 mb-2">Final Test Data</h2>
                   <div className="text-gray-700">
                     <p><strong>Date and Time:</strong> {new Date(finalTestData.dateTime).toLocaleString()}</p>
                     <p><strong>TDS:</strong> {finalTestData.tds} ppm</p>
