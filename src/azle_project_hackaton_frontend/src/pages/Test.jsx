@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import Alert from '../components/Alert';
 import { useAuth, useRestActor } from '@bundly/ares-react';
 import Spinner from '../components/Spinner';
+import CardTest from '../components/CardTest';
 
 const Test = () => {
   const { isAuthenticated, currentIdentity } = useAuth();
@@ -96,17 +97,7 @@ const Test = () => {
                 <Spinner color="blue" />
               )}
               {initialTestData && !loading.initial && (
-                <div className="mt-4 bg-white p-4 rounded-lg shadow-lg border border-blue-800">
-                  <h2 className="text-xl font-bold text-blue-800 mb-2">Initial Test Data</h2>
-                  <div className="text-gray-700">
-                    <p><strong>Date and Time:</strong> {new Date(initialTestData.dateTime).toLocaleString()}</p>
-                    <p><strong>TDS:</strong> {initialTestData.tds}</p>
-                    <p><strong>Temperature:</strong> {initialTestData.temperature}°C</p>
-                    <p><strong>pH:</strong> {initialTestData.pH}</p>
-                    <p><strong>Turbidity:</strong> {initialTestData.turbidity}</p>
-                    <p><strong>Quantity:</strong> {initialTestData.quantity} liters</p>
-                  </div>
-                </div>
+                <CardTest color="blue" data={initialTestData} title="Initial Test Data"/>
               )}
             </div>
             <div>
@@ -121,17 +112,7 @@ const Test = () => {
                 <Spinner color="green" />
               )}
               {finalTestData && !loading.final && (
-                <div className="mt-4 bg-white p-4 rounded-lg shadow-lg border border-green-800">
-                  <h2 className="text-xl font-bold text-green-800 mb-2">Final Test Data</h2>
-                  <div className="text-gray-700">
-                    <p><strong>Date and Time:</strong> {new Date(finalTestData.dateTime).toLocaleString()}</p>
-                    <p><strong>TDS:</strong> {finalTestData.tds} ppm</p>
-                    <p><strong>Temperature:</strong> {finalTestData.temperature}°C</p>
-                    <p><strong>pH:</strong> {finalTestData.pH}</p>
-                    <p><strong>Turbidity:</strong> {finalTestData.turbidity} NTU</p>
-                    <p><strong>Quantity:</strong> {finalTestData.quantity}</p>
-                  </div>
-                </div>
+                <CardTest color="green" data={finalTestData} title="Final Test Data"/>
               )}
             </div>
           </>
