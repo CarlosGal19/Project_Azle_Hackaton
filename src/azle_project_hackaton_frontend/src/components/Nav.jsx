@@ -10,11 +10,11 @@ const Nav = () => {
     <nav className="flex mb-8 mt-4">
         <div className="w-4/5 my-auto">
             <ul className="flex justify-evenly font-bold text-3xl text-blue-900">
-                <li><Link to='/'>Home</Link></li>
-                <li><Link to='/initial'>Initial Test</Link></li>
-                <li><Link to='/final'>Final Test</Link></li>
-                <li><Link to='/test'>Test</Link></li>
-                <li><Link to='/suggest'>Suggestions</Link></li>
+                <li><Link to='/'><img src="./aquanova.png" alt="AquaNova Home" className="w-24" /></Link></li>
+                <li className="my-auto"><Link to='/initial'>Initial Test</Link></li>
+                <li className="my-auto"><Link to='/final'>Final Test</Link></li>
+                <li className="my-auto"><Link to='/test'>Test</Link></li>
+                <li className="my-auto"><Link to='/suggest'>Suggestions</Link></li>
             </ul>
         </div>
         <div className="flex w-1/5 justify-center">
