@@ -11,7 +11,7 @@ const App = () => {
   return (
     <div className="min-h-screen bg-gray-100 p-4">
       <div className="max-w-6xl mx-auto">
-        <div className="flex justify-center mb-8">
+        <div className="flex justify-center mb-8 bg-white rounded-2xl">
           <img src="./utma.png" alt="UTMA Logo" className="h-32 w-auto" />
           <img src="/aquanova.png" alt="Aquanova Logo" className="h-32 w-32 ml-4" />
         </div>
@@ -22,7 +22,7 @@ const App = () => {
           </p>
         </div>
 
-        <div className="bg-white mt-8 grid gap-8 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-8 grid gap-8 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
           <div className="bg-emerald-100 p-6 rounded-lg shadow-lg border-blue-500">
             <h2 className="text-xl font-bold text-blue-800 mb-2">Mission</h2>
             <p className="text-gray-700">
